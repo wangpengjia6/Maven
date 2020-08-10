@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.atguigu.maven</groupId>
+    <artifactId>Java0724</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <!--
+        Maven项目类型：
+            pom : 表示父工程
+            jar : 表示java工程，默认。可以省略不写
+            war : 表示Web工程
+     -->
+    <packaging>pom</packaging>
+
+    <!-- dependencyManagement标签，【不会】将依赖包加入到父工程中。
+        子工程需要使用时，需要单独声明。不需要管理版本和范围。由父工程统一管理。
+        例外：子工程如果指定版本和范围，以子工程设置为主，否则，使用父工程继承的版本和范围。
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <!-- 依赖范围： test 测试范围
+                    ①src/main/java目录下的类不可以使用【编译环境】
+                    ②src/test/java目录下的类可以使用【测试环境】
+                    ③当前包不参与部署【生产环境】
+                -->
+                <scope>test</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <!-- dependencies标签，【会】将依赖包加入到父工程中。
+        所有子工程都可以直接使用这个包。无需做任何声明配置。
+     -->
+    <dependencies>
+    <!--
+        junit/junit/4.9/junit-4.9.jar
+    -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.9</version>
+        <!-- 依赖范围： test 测试范围
+            ①src/main/java目录下的类不可以使用【编译环境】
+            ②src/test/java目录下的类可以使用【测试环境】
+            ③当前包不参与部署【生产环境】
+        -->
+        <scope>test</scope>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>5.2.4.RELEASE</version>
+        <!-- 依赖范围： compile 默认值，可以省略不写
+            ①src/main/java目录下的类可以使用
+            ②src/test/java目录下的类可以使用
+            ③当前包参与部署
+        -->
+        <scope>compile</scope>
+    </dependency>
+    </dependencies>
+    <!--聚合-->
+    <modules>
+        <module>A</module>
+        <module>B</module>
+    </modules>
+
+</project>
